@@ -1,7 +1,9 @@
 import inquirer from "inquirer";
 import path from "path";
+import * as fs from "fs";
+import {ADOFAIParser} from "./utils";
 
-function execute(answers: {
+function execute({outfile,startTile,offset,duration,direction,count,overwrite,filename}: {
     filename: string,
     overwrite: boolean,
     startTile: number
@@ -11,8 +13,9 @@ function execute(answers: {
     direction: Direction
     outfile?: string
 }) {
-    const dir = path.join(answers.filename, '..')
-    console.log(dir)
+    const dir = path.join(filename, '..')
+    const level = ADOFAIParser(fs.readFileSync(filename).toString())
+    console.log(level)
 }
 
 enum Direction {
