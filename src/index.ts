@@ -23,9 +23,9 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
     }
     for (let i = 1; i < count; i++) {
         for (let j = 1; j < 5; j++) {
+            const tile = startTile + (4 * i) + j - 1
+            const v = .55 * i
             if (direction === Direction.RIGHT) {
-                const tile = startTile + (4 * i) + j - 1
-                const v = .55 * i
                 let res: any
                 switch (j) {
                     case 1:
@@ -41,7 +41,39 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                         res = [v * -1, v * -1]
                         break
                 }
-                console.log(res)
+                level.actions.push(
+                    {
+                        "floor": startTile - offset,
+                        "eventType": "MoveTrack",
+                        "startTile": [tile, "ThisTile"],
+                        "endTile": [tile, "ThisTile"],
+                        "duration": duration,
+                        "positionOffset": res,
+                        "rotationOffset": 0,
+                        "scale": 100,
+                        "opacity": 100,
+                        "angleOffset": 0,
+                        "ease": "OutBack",
+                        "eventTag": ""
+                    }
+                )
+            }
+            if (direction === Direction.LEFT) {
+                let res: any
+                switch (j) {
+                    case 1:
+                        res = [v*-1, v * -1]
+                        break
+                    case 2:
+                        res = [v*-1, v]
+                        break
+                    case 3:
+                        res = [v, v]
+                        break
+                    case 4:
+                        res = [v, v * -1]
+                        break
+                }
                 level.actions.push(
                     {
                         "floor": startTile - offset,
