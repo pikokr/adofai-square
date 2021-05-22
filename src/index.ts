@@ -43,7 +43,7 @@ if (process.env.DEV === 'true') {
             name: 'overwrite',
             default: false
         },
-        {name: 'outfile', type: 'input', default: () => 'square.adofai', message: '출력 파일을 입력해주세요', when: answers => answers.overwrite},
+        {name: 'outfile', type: 'input', default: () => 'square.adofai', message: '출력 파일을 입력해주세요', when: answers => !answers.overwrite},
         {
             message: '사각형 시작 타일',
             type: 'number',
