@@ -28,7 +28,8 @@ if (process.env.DEV === 'true') {
         direction: Direction.RIGHT,
         duration: 2,
         offset: 4,
-        startTile: 4
+        startTile: 4,
+        outfile: 'out.adofai'
     })
 } else
     inquirer.prompt([
