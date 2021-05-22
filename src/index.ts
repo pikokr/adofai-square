@@ -1,5 +1,4 @@
 import inquirer from "inquirer";
-import fs from "fs";
 import path from "path";
 
 function execute(answers: {
@@ -12,7 +11,7 @@ function execute(answers: {
     direction: Direction
     outfile?: string
 }) {
-    const dir = path.join(answers.filename, '.')
+    const dir = path.join(answers.filename, '..')
     console.log(dir)
 }
 
@@ -22,10 +21,15 @@ enum Direction {
 }
 
 if (process.env.DEV === 'true') {
-    // execute({
-    //     filename: './test.adofai',
-    //     overwrite: false
-    // })
+    execute({
+        filename: path.join(process.cwd(), 'test.adofai'),
+        overwrite: false,
+        count: 4,
+        direction: Direction.RIGHT,
+        duration: 2,
+        offset: 4,
+        startTile: 4
+    })
 } else
     inquirer.prompt([
         {
