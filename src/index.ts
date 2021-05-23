@@ -85,7 +85,7 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
         // }
         for (let j = 1; j < count - i + 1; j++) {
             for (let k = 1; k < 5; k++) {
-                const v = distance * (i) - distance
+                const v = distance * (j) - distance
                 let res: any
                 if (direction === Direction.RIGHT) {
                     switch (k) {
