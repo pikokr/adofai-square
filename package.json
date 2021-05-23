@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src"
+    "start": "ts-node src",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +18,8 @@
   },
   "dependencies": {
     "inquirer": "^8.1.0"
+  },
+  "bin": {
+    "adofai-square": "./dist/index.js"
   }
 }

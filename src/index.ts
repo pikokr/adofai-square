@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import inquirer from "inquirer";
 import path from "path";
 import * as fs from "fs";
@@ -14,11 +16,12 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
     outfile?: string
     distance: number
 }) {
+    if (filename.endsWith(' ')) filename = filename.slice(0, filename.length-1)
     const dir = path.join(filename, '..')
     const file = fs.readFileSync(filename)
     const level = ADOFAIParser(file.toString())
     if (overwrite) {
-        fs.writeFileSync(path.join(), 'backup_' + file)
+        fs.writeFileSync(path.join(dir, 'backup_' + file), file)
         outfile = filename
     }
     for (let i = 1; i < count; i++) {
