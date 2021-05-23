@@ -1,5 +1,5 @@
 ﻿{
-	"pathData": "RRRRULDRULDRULDRULDRRR", 
+	"pathData": "RRRRRULDRULDRULDRULDRRRRRR", 
 	"settings":
 	{
 		"version": 3, 
@@ -18,9 +18,9 @@
 		"levelDesc": "레벨에 대해 말해보세요!", 
 		"levelTags": "", 
 		"artistLinks": "", 
-		"difficulty": 1, ,
+		"difficulty": 1,
 		"songFilename": "", 
-		"bpm": 100, 
+		"bpm": 256, 
 		"volume": 100, 
 		"offset": 0, 
 		"pitch": 100, 

@@ -3,7 +3,7 @@ import path from "path";
 import * as fs from "fs";
 import {ADOFAIParser} from "./utils";
 
-function execute({outfile, startTile, offset, duration, direction, count, overwrite, filename}: {
+function execute({outfile, startTile, offset, duration, direction, count, overwrite, filename, distance}: {
     filename: string,
     overwrite: boolean,
     startTile: number
@@ -22,11 +22,12 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
         outfile = filename
     }
     for (let i = 1; i < count; i++) {
+        const _tile = startTile + (4 * i) - 4
         for (let j = 1; j < 5; j++) {
-            const tile = startTile + (4 * i) + j - 1
-            const v = .55 * i
+            let res: any
+            const tile = (4 * (i + 1)) + j - 1
+            const v = distance * (i)
             if (direction === Direction.RIGHT) {
-                let res: any
                 switch (j) {
                     case 1:
                         res = [v, v * -1]
@@ -41,31 +42,14 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                         res = [v * -1, v * -1]
                         break
                 }
-                level.actions.push(
-                    {
-                        "floor": startTile - offset,
-                        "eventType": "MoveTrack",
-                        "startTile": [tile, "ThisTile"],
-                        "endTile": [tile, "ThisTile"],
-                        "duration": duration,
-                        "positionOffset": res,
-                        "rotationOffset": 0,
-                        "scale": 100,
-                        "opacity": 100,
-                        "angleOffset": 0,
-                        "ease": "OutBack",
-                        "eventTag": ""
-                    }
-                )
             }
             if (direction === Direction.LEFT) {
-                let res: any
                 switch (j) {
                     case 1:
-                        res = [v*-1, v * -1]
+                        res = [v * -1, v * -1]
                         break
                     case 2:
-                        res = [v*-1, v]
+                        res = [v * -1, v]
                         break
                     case 3:
                         res = [v, v]
@@ -74,24 +58,87 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                         res = [v, v * -1]
                         break
                 }
+            }
+            level.actions.push(
+                {
+                    "floor": startTile - offset,
+                    "eventType": "MoveTrack",
+                    "startTile": [tile, "ThisTile"],
+                    "endTile": [tile, "ThisTile"],
+                    "duration": duration,
+                    "positionOffset": res,
+                    "rotationOffset": 0,
+                    "scale": 100,
+                    "opacity": 100,
+                    "angleOffset": 0,
+                    "ease": "OutBack",
+                    "eventTag": ""
+                }
+            )
+        }
+        // for (let k = i; k < count; k++) {
+        //     const v = distance * (k)
+        //     for (let l = 0; l < 4; l++) {
+        //         console.log([(4+l),(4 + l), v])
+        //     }
+        //     console.log('=========')
+        // }
+        for (let j = 1; j < count - i + 1; j++) {
+            for (let k = 1; k < 5; k++) {
+                const v = distance * (i) - distance
+                let res: any
+                if (direction === Direction.RIGHT) {
+                    switch (k) {
+                        case 1:
+                            res = [v, v * -1]
+                            break
+                        case 2:
+                            res = [v, v]
+                            break
+                        case 3:
+                            res = [v * -1, v]
+                            break
+                        case 4:
+                            res = [v * -1, v * -1]
+                            break
+                    }
+                }
+                if (direction === Direction.LEFT) {
+                    switch (k) {
+                        case 1:
+                            res = [v * -1, v * -1]
+                            break
+                        case 2:
+                            res = [v * -1, v]
+                            break
+                        case 3:
+                            res = [v, v]
+                            break
+                        case 4:
+                            res = [v, v * -1]
+                            break
+                    }
+                }
+                console.log(res)
                 level.actions.push(
                     {
-                        "floor": startTile - offset,
+                        "floor": _tile,
                         "eventType": "MoveTrack",
-                        "startTile": [tile, "ThisTile"],
-                        "endTile": [tile, "ThisTile"],
+                        "startTile": [(4 * j) + k - 1, "ThisTile"],
+                        "endTile": [(4 * j) + k - 1, "ThisTile"],
                         "duration": duration,
                         "positionOffset": res,
                         "rotationOffset": 0,
                         "scale": 100,
                         "opacity": 100,
                         "angleOffset": 0,
-                        "ease": "OutBack",
+                        "ease": "InQuart",
                         "eventTag": ""
                     }
                 )
             }
         }
+        console.log('========')
     }
     fs.writeFileSync(outfile!, JSON.stringify(level))
 }
@@ -109,7 +156,7 @@ if (process.env.DEV === 'true') {
         direction: Direction.RIGHT,
         duration: 2,
         offset: 4,
-        startTile: 4,
+        startTile: 5,
         outfile: 'out.adofai',
         distance: .55
     })
