@@ -119,7 +119,6 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                             break
                     }
                 }
-                console.log(res)
                 level.actions.push(
                     {
                         "floor": _tile,
@@ -138,7 +137,6 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                 )
             }
         }
-        console.log('========')
     }
     fs.writeFileSync(outfile!, JSON.stringify(level))
 }
@@ -148,11 +146,11 @@ enum Direction {
     RIGHT
 }
 
-if (process.env.DEV === 'true') {
+if (process.argv[0].endsWith('ts-node')) {
     execute({
         filename: path.join(process.cwd(), 'test.adofai'),
         overwrite: false,
-        count: 4,
+        count: 64,
         direction: Direction.RIGHT,
         duration: 2,
         offset: 4,

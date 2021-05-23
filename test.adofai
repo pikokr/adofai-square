@@ -1,5 +1,5 @@
 ﻿{
-	"pathData": "RRRRRULDRULDRULDRULDRRRRRR", 
+	"pathData": "RRRRRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRRRRRR", 
 	"settings":
 	{
 		"version": 3, 
@@ -20,11 +20,11 @@
 		"artistLinks": "", 
 		"difficulty": 1,
 		"songFilename": "", 
-		"bpm": 256, 
+		"bpm": 800, 
 		"volume": 100, 
 		"offset": 0, 
 		"pitch": 100, 
-		"hitsound": "Kick", 
+		"hitsound": "Shaker", 
 		"hitsoundVolume": 100, 
 		"countdownTicks": 4,
 		"trackColorType": "Single", 
