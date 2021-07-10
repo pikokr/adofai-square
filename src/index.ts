@@ -21,14 +21,14 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
     const file = fs.readFileSync(filename)
     const level = ADOFAIParser(file.toString())
     if (overwrite) {
-        fs.writeFileSync(path.join(dir, 'backup_' + file), file)
+        fs.writeFileSync(path.join(dir, 'backup_' + filename), file)
         outfile = filename
     }
     for (let i = 1; i < count; i++) {
         const _tile = startTile + (4 * i) - 4
         for (let j = 1; j < 5; j++) {
             let res: any
-            const tile = (4 * (i + 1)) + j - 1
+            const tile = (4 * (i + 1)) + j - 1 - offset + 4
             const v = distance * (i)
             if (direction === Direction.RIGHT) {
                 switch (j) {
@@ -79,13 +79,6 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                 }
             )
         }
-        // for (let k = i; k < count; k++) {
-        //     const v = distance * (k)
-        //     for (let l = 0; l < 4; l++) {
-        //         console.log([(4+l),(4 + l), v])
-        //     }
-        //     console.log('=========')
-        // }
         for (let j = 1; j < count - i + 1; j++) {
             for (let k = 1; k < 5; k++) {
                 const v = distance * (j) - distance
@@ -128,7 +121,7 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
                         "eventType": "MoveTrack",
                         "startTile": [(4 * j) + k - 1, "ThisTile"],
                         "endTile": [(4 * j) + k - 1, "ThisTile"],
-                        "duration": duration,
+                        "duration": 2,
                         "positionOffset": res,
                         "rotationOffset": 0,
                         "scale": 100,
@@ -141,6 +134,7 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
             }
         }
     }
+
     fs.writeFileSync(outfile!, JSON.stringify(level))
 }
 
@@ -211,7 +205,7 @@ if (process.argv[0].endsWith('ts-node')) {
             message: '길의 진행 방향',
             type: 'list',
             name: 'direction',
-            choices: [{name: '왼쪽', value: Direction.LEFT}, {name: '오른쪽', value: Direction.RIGHT}]
+            choices: [{name: '오른쪽', value: Direction.RIGHT}, {name: '왼쪽', value: Direction.LEFT}]
         }
     ]).then(answers => {
         execute(answers)
