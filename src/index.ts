@@ -28,7 +28,7 @@ function execute({outfile, startTile, offset, duration, direction, count, overwr
         const _tile = startTile + (4 * i) - 4
         for (let j = 1; j < 5; j++) {
             let res: any
-            const tile = (4 * (i + 1)) + j - 1 - offset + 4
+            const tile = (4 * (i)) + j
             const v = distance * (i)
             if (direction === Direction.RIGHT) {
                 switch (j) {
@@ -143,15 +143,15 @@ enum Direction {
     RIGHT
 }
 
-if (process.argv[0].endsWith('ts-node')) {
+if (process.argv[0].includes('ts-node')) {
     execute({
         filename: path.join(process.cwd(), 'test.adofai'),
         overwrite: false,
-        count: 64,
+        count: 3,
         direction: Direction.RIGHT,
-        duration: 2,
-        offset: 4,
-        startTile: 5,
+        duration: 1,
+        offset: 1,
+        startTile: 3,
         outfile: 'out.adofai',
         distance: .55
     })

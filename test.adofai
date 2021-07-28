@@ -1,8 +1,8 @@
 ﻿{
-	"pathData": "RRRRRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRULDRRRRRR", 
+	"pathData": "RRRULDRULDRULDRRRR", 
 	"settings":
 	{
-		"version": 3, 
+		"version": 4, 
 		"artist": "작곡가", 
 		"specialArtistType": "None", 
 		"artistPermission": "", 
@@ -20,7 +20,7 @@
 		"artistLinks": "", 
 		"difficulty": 1,
 		"songFilename": "", 
-		"bpm": 800, 
+		"bpm": 100, 
 		"volume": 100, 
 		"offset": 0, 
 		"pitch": 100, 
@@ -57,7 +57,8 @@
 		"floorIconOutlines": "Disabled", 
 		"stickToFloors": "Disabled", 
 		"planetEase": "Linear", 
-		"planetEaseParts": 1
+		"planetEaseParts": 1,
+		"legacyFlash": true 
 	},
 	"actions":
 	[
